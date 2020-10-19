@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - 12
+  - 13
 
 services:
   - docker
@@ -11,13 +11,15 @@ install:
 
 # Scripts to be run such as tests
 before_script:
-  - echo "no tests"
+  - npm install
+  - npm run build
+  - echo "Buildstep done"
 
 script:
   - docker --version # print the version for logging
-  - docker build -t udacity-frontend .
-  - docker tag $YOUR_DOCKER_HUB/udacity-frontend:latest
+  - docker build -t udacity-3-frontend .
+  - docker tag udacity-3-frontend fjenkel/udacity-3-frontend:latest
 
 after_success:
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push YOUR_DOCKER_HUB/udacity-frontend
+  - echo "$DOCKER_ACCESS_TOKEN" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push fjenkel/udacity-3-frontend
