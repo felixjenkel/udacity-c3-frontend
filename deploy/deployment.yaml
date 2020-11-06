@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: udacity-3-frontend
+  labels:
+    app: udacity-3-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: udacity-3-frontend
+  template:
+    metadata:
+      labels:
+        app: udacity-3-frontend
+    spec:
+      containers:
+      - name: udacity-3-frontend
+        image: fjenkel/udacity-3-frontend
+        ports:
+        - containerPort: 8080
